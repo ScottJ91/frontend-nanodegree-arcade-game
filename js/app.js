@@ -42,6 +42,8 @@ var Player = function(x, y) {
         this.x = x;
         this.y = y;
 
+        this.height = 80;
+        this.width = 50;
 
         // Now instantiate your objects.
         // Place all enemy objects in an array called allEnemies
