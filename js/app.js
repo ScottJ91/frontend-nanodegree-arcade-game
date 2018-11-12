@@ -77,6 +77,21 @@ var Player = function(x, y) {
             }
         };
 
+        //comparing position of each enemy with position of the player 
+
+        Player.prototype.reset = function(x, y) {
+            this.x = x;
+            this.y = y;
+        };
+
+        function checkCollisions(player, allEnemies) {
+            for (var i = 0; i < allEnemies.length; i++) {
+                if (allEnemies[i].x < player.x + player.width && allEnemies[i].x + allEnemies[i].width > player.x && allEnemies[i].y < player.y + player.height && allEnemies[i].y + allEnemies[i].height > player.y) {
+                    player.reset(200, 400);
+                }
+            }
+        }
+
         // This listens for key presses and sends the keys to your
         // Player.handleInput() method. You don't need to modify this.
         document.addEventListener('keyup', function(e) {
