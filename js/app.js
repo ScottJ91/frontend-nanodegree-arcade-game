@@ -77,7 +77,7 @@ var Player = function(x, y) {
             }
         };
 
-        //comparing position of each enemy with position of the player 
+        // comparing position of each enemy with position of the player 
 
         Player.prototype.reset = function(x, y) {
             this.x = x;
@@ -92,6 +92,14 @@ var Player = function(x, y) {
             }
         }
 
+        // enemy/player objects
+        var allEnemies = [
+            new Enemy(0, 63),
+            new Enemy(0, 147),
+            new Enemy(0, 230)
+        ];
+
+        var player = new Player(200, 400);
         // This listens for key presses and sends the keys to your
         // Player.handleInput() method. You don't need to modify this.
         document.addEventListener('keyup', function(e) {
