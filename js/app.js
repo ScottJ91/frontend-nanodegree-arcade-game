@@ -39,76 +39,85 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(x, y) {
-        this.x = x;
-        this.y = y;
+    this.x = x;
+    this.y = y;
 
-        this.height = 80;
-        this.width = 50;
+    this.height = 80;
+    this.width = 50;
 
-        // Now instantiate your objects.
-        // Place all enemy objects in an array called allEnemies
-        // Place the player object in a variable called player
+    this.playerSprite = [
+        //'images/char-princess-girl.png',
+        'images/char-boy.png',
+        //'images/char-cat-girl.png',
+        // 'images/char-horn-girl.png',
+        // 'images/char-pink-girl.png'
+    ];
+    this.sprite = this.playerSprite[Math.floor(Math.random() * 5)];
+};
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+// Place the player object in a variable called player
 
-        Player.prototype.update = function() {
-            if (this.y <= 0) {
-                this.x = 202;
-                this.y = 405;
-            }
+Player.prototype.update = function() {
+    if (this.y <= 0) {
+        this.x = 202;
+        this.y = 405;
+    }
 
-        };
+};
 
-        Player.prototype.render = function() {
-            ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        };
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
-        // moving player using keyboard
-        Player.prototype.handleInput = function(keyPress) {
-            if (keyPress == 'up' && this.y > 0) {
-                this.y -= 83;
-            }
-            if (keyPress == 'down' && this.y < 402) {
-                this.y += 83;
-            }
-            if (keyPress == 'left' && this.x > 0) {
-                this.x -= 102;
-            }
-            if (keyPress == 'right' && this.x < 402) {
-                this.x += 102;
-            }
-        };
+// moving player using keyboard
+Player.prototype.handleInput = function(keyPress) {
+    if (keyPress == 'up' && this.y > 0) {
+        this.y -= 83;
+    }
+    if (keyPress == 'down' && this.y < 402) {
+        this.y += 83;
+    }
+    if (keyPress == 'left' && this.x > 0) {
+        this.x -= 102;
+    }
+    if (keyPress == 'right' && this.x < 402) {
+        this.x += 102;
+    }
+};
 
-        // comparing position of each enemy with position of the player 
+// comparing position of each enemy with position of the player 
 
-        Player.prototype.reset = function(x, y) {
-            this.x = x;
-            this.y = y;
-        };
+Player.prototype.reset = function(x, y) {
+    this.x = x;
+    this.y = y;
+};
 
-        function checkCollisions(player, allEnemies) {
-            for (var i = 0; i < allEnemies.length; i++) {
-                if (allEnemies[i].x < player.x + player.width && allEnemies[i].x + allEnemies[i].width > player.x && allEnemies[i].y < player.y + player.height && allEnemies[i].y + allEnemies[i].height > player.y) {
-                    player.reset(200, 400);
-                }
-            }
+function checkCollisions(player, allEnemies) {
+    for (var i = 0; i < allEnemies.length; i++) {
+        if (allEnemies[i].x < player.x + player.width && allEnemies[i].x + allEnemies[i].width > player.x && allEnemies[i].y < player.y + player.height && allEnemies[i].y + allEnemies[i].height > player.y) {
+            player.reset(200, 400);
         }
+    }
+}
 
-        // enemy/player objects
-        var allEnemies = [
-            new Enemy(0, 63),
-            new Enemy(0, 147),
-            new Enemy(0, 230)
-        ];
+// enemy/player objects
+var allEnemies = [
+    new Enemy(0, 63),
+    new Enemy(0, 147),
+    new Enemy(0, 230)
+];
 
-        var player = new Player(200, 400);
-        // This listens for key presses and sends the keys to your
-        // Player.handleInput() method. You don't need to modify this.
-        document.addEventListener('keyup', function(e) {
-            var allowedKeys = {
-                37: 'left',
-                38: 'up',
-                39: 'right',
-                40: 'down'
-            };
+var player = new Player(200, 400);
+// This listens for key presses and sends the keys to your
+// Player.handleInput() method. You don't need to modify this.
+document.addEventListener('keyup', function(e) {
+    var allowedKeys = {
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down'
+    };
 
-            player.handleInput(allowedKeys[e.keyCode]);
-        });
+    player.handleInput(allowedKeys[e.keyCode]);
+});
